@@ -29,3 +29,5 @@ Academias espalhadas nas cidades da região: Rio do Sul, Ibirama, Apiúna, Ascur
 ● Controle de Frequência<br>
 ● Relatórios<br>
 ● Mala Direta<br>
+
+Catraca: o sistema só libera a entrada de alunos se a matrícula/mensalidade estiver em dia e for o horário de atividades do aluno
