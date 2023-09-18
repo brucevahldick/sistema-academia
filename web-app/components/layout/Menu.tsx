@@ -7,16 +7,15 @@ interface Props {
 }
 
 function Menu({menus}: Props) {
-    const [selectedIndex, setSelectedIndex] = useState(-1);
-
-    return <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-        <div className="container-fluid">
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    return <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container">
             <a className="navbar-brand" href="#">Academia</a>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     {
                         menus.map((menu, index) =>
-                            <MenuItem nome={menu.getName()} route={menu.getRoute()} index={index}
+                            <MenuItem key={index} nome={menu.getName()} route={menu.getRoute()} index={index}
                                       selected={selectedIndex == index}
                                       onSelectedItem={(index) => setSelectedIndex(index)}></MenuItem>
                         )

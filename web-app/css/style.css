@@ -1,0 +1,17 @@
+.system-row {
+    margin-bottom: 20px;
+}
+
+.system-container {
+    padding-top: 40px;
+}
+
+.system-form-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: end;
+}
+
+.system-row-title {
+    margin-top: 20px;
+}

@@ -1,8 +1,10 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Layout from "../components/Layout";
 import Home from "./Home";
 import Cadastro from "./Cadastro";
 import Alunos from "./Alunos";
+import {ReactNode} from "react";
+import Menu from "../layout/Menu";
+import MenuItemModel from "../model/MenuItemModel";
 
 export const CADASTRO_ROUTE: string = '/cadastro';
 export const ALUNOS_ROUTE: string = '/alunos';
@@ -15,15 +17,22 @@ export const RELATORIOS_ROUTE: string = '/relatórios';
 export const AJUDA_ROUTE: string = '/ajuda';
 export const SAIR_ROUTE: string = '/sair';
 
-function AppRoutes() {
+interface Props {
+    children: ReactNode
+}
 
-    return <BrowserRouter>
-        <Routes>
-            <Route index element={<Home/>}/>
-            <Route path={CADASTRO_ROUTE} element={<Cadastro/>}/>
-            <Route path={ALUNOS_ROUTE} element={<Alunos/>}/>
-        </Routes>
-    </BrowserRouter>
+function AppRoutes({children}: Props) {
+
+    return <>
+        <BrowserRouter>
+            {children}
+            <Routes>
+                <Route index element={<Home/>}/>
+                <Route path={CADASTRO_ROUTE} element={<Cadastro/>}/>
+                <Route path={ALUNOS_ROUTE} element={<Alunos/>}/>
+            </Routes>
+        </BrowserRouter>
+    </>
 }
 
 export default AppRoutes
