@@ -14,11 +14,11 @@ const menus = [
     new MenuItemModel('Home', '/'),
     new MenuItemModel('Cadastro', CADASTRO_ROUTE),
     new MenuItemModel('Alunos', ALUNOS_ROUTE),
-    new MenuItemModel('Horários', HORARIOS_ROUTE),
-    new MenuItemModel('Vendas', VENDAS_ROUTE),
-    new MenuItemModel('Compras', COMPRAS_ROUTE),
-    new MenuItemModel('Caixa', CAIXA_ROUTE),
-    new MenuItemModel('Sistema', SISTEMA_ROUTE),
+    new MenuItemModel('Hpp', HORARIOS_ROUTE),
+    new MenuItemModel('', VENDAS_ROUTE),
+    new MenuItemModel('Cpp', COMPRAS_ROUTE),
+    new MenuItemModel('Loja', CAIXA_ROUTE),
+    new MenuItemModel('pp', SISTEMA_ROUTE),
     new MenuItemModel('Relatórios', RELATORIOS_ROUTE),
     new MenuItemModel('Ajuda', AJUDA_ROUTE),
     new MenuItemModel('Sair', SAIR_ROUTE)
@@ -28,6 +28,11 @@ function App() {
     return <AppRoutes>
         <Menu menus={menus}></Menu>
     </AppRoutes>
+
+
+
 }
+
+
 
 export default App
