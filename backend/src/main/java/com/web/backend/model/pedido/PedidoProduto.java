@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.model.pedido;
+package com.web.backend.model.pedido;
 
-import com.web.backendsistemaacademia.model.Produto;
+import com.web.backend.model.Produto;
 import jakarta.persistence.*;
 
 @Entity

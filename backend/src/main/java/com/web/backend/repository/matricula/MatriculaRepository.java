@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.repository.matricula;
+package com.web.backend.repository.matricula;
 
-import com.web.backendsistemaacademia.model.matricula.Matricula;
+import com.web.backend.model.matricula.Matricula;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MatriculaRepository extends JpaRepository<Matricula, Long> {

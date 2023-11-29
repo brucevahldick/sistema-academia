@@ -1,7 +1,7 @@
-package com.web.backendsistemaacademia.model.matricula;
+package com.web.backend.model.matricula;
 
-import com.web.backendsistemaacademia.model.Agendamento;
-import com.web.backendsistemaacademia.model.pessoa.Pessoa;
+import com.web.backend.model.Agendamento;
+import com.web.backend.model.pessoa.Pessoa;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.repository;
+package com.web.backend.repository;
 
-import com.web.backendsistemaacademia.model.Agendamento;
+import com.web.backend.model.Agendamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {

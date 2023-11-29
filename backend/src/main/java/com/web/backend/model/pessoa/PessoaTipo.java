@@ -1,4 +1,4 @@
-package com.web.backendsistemaacademia.model.pessoa;
+package com.web.backend.model.pessoa;
 
 public enum PessoaTipo {
     INSTRUTOR(1, "Instrutor"),

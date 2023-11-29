@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.model.pedido;
+package com.web.backend.model.pedido;
 
-import com.web.backendsistemaacademia.model.pessoa.Pessoa;
+import com.web.backend.model.pessoa.Pessoa;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

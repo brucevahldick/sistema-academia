@@ -1,4 +1,4 @@
-package com.web.backendsistemaacademia.model.pedido;
+package com.web.backend.model.pedido;
 
 public enum PedidoSituacao {
     AGUARDANDO_PAGAMENTO(1, "Aguardando Pagamento"),

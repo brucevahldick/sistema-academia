@@ -1,8 +1,8 @@
-package com.web.backendsistemaacademia.model;
+package com.web.backend.model;
 
-import com.web.backendsistemaacademia.model.atividade.HorarioAtividade;
-import com.web.backendsistemaacademia.model.atividade.InstrutorAtividade;
-import com.web.backendsistemaacademia.model.atividade.LocalAtividade;
+import com.web.backend.model.atividade.HorarioAtividade;
+import com.web.backend.model.atividade.InstrutorAtividade;
+import com.web.backend.model.atividade.LocalAtividade;
 import jakarta.persistence.*;
 
 @Entity

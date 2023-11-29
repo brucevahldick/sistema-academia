@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.controller.matricula;
+package com.web.backend.controller.matricula;
 
-import com.web.backendsistemaacademia.repository.matricula.MatriculaRepository;
+import com.web.backend.repository.matricula.MatriculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;

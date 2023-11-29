@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.repository;
+package com.web.backend.repository;
 
-import com.web.backendsistemaacademia.model.Produto;
+import com.web.backend.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {

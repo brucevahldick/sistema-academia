@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.repository.pessoa;
+package com.web.backend.repository.pessoa;
 
-import com.web.backendsistemaacademia.model.pessoa.Pessoa;
+import com.web.backend.model.pessoa.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {

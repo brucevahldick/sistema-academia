@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.model.atividade;
+package com.web.backend.model.atividade;
 
-import com.web.backendsistemaacademia.model.pessoa.Pessoa;
+import com.web.backend.model.pessoa.Pessoa;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

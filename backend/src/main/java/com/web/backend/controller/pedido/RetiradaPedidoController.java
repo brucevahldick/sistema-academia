@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.controller.pedido;
+package com.web.backend.controller.pedido;
 
-import com.web.backendsistemaacademia.repository.pedido.RetiradaPedidoRepository;
+import com.web.backend.repository.pedido.RetiradaPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;

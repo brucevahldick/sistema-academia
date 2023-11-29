@@ -1,4 +1,4 @@
-package com.web.backendsistemaacademia.model;
+package com.web.backend.model;
 
 import jakarta.persistence.*;
 

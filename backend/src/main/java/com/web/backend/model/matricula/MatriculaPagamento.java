@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.model.matricula;
+package com.web.backend.model.matricula;
 
-import com.web.backendsistemaacademia.model.Pagamento;
+import com.web.backend.model.Pagamento;
 import jakarta.persistence.*;
 
 @Entity

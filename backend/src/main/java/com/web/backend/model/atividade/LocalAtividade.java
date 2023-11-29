@@ -1,6 +1,6 @@
-package com.web.backendsistemaacademia.model.atividade;
+package com.web.backend.model.atividade;
 
-import com.web.backendsistemaacademia.model.Midia;
+import com.web.backend.model.Midia;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
