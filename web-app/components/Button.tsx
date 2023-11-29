@@ -1,6 +1,8 @@
 interface Props {
     title: string,
-    type: any
+    type: any,
+    onClick?: () => void,
+    additionalClasses?: string
 }
 
 export const enum ButtonTypes {
@@ -9,8 +11,8 @@ export const enum ButtonTypes {
     Button = "button"
 }
 
-function Button({title, type}: Props) {
-    return <button type={type} className="btn btn-primary">
+function Button({title, type, onClick, additionalClasses}: Props) {
+    return <button type={type} className={"btn " + additionalClasses} onClick={onClick}>
         {title}
     </button>
 }
