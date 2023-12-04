@@ -1,6 +1,14 @@
 import Endereco from "./Endereco";
 
 class Aluno {
+    get id(): number {
+        return this._id;
+    }
+
+    set id(value: number) {
+        this._id = value;
+    }
+    private _id: number
     private _codigo: string;
     private _nome: string;
     private _dataNascimento: Date;
@@ -11,7 +19,8 @@ class Aluno {
     private _email: string;
     private _endereco: Endereco;
 
-    constructor(codigo: string, nome: string, dataNascimento: Date, sexo: string, ativo: boolean, fone: string, celular: string, email: string, endereco: Endereco) {
+    constructor(id: number, codigo: string, nome: string, dataNascimento: Date, sexo: string, ativo: boolean, fone: string, celular: string, email: string, endereco: Endereco) {
+        this._id = id;
         this._codigo = codigo;
         this._nome = nome;
         this._dataNascimento = dataNascimento;

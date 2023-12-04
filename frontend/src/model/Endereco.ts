@@ -38,6 +38,30 @@ class Endereco {
     get bairro(): string {
         return this._bairro;
     }
+
+    set estado(value: string) {
+        this._estado = value;
+    }
+
+    set cidade(value: string) {
+        this._cidade = value;
+    }
+
+    set rua(value: string) {
+        this._rua = value;
+    }
+
+    set cep(value: string) {
+        this._cep = value;
+    }
+
+    set numero(value: number) {
+        this._numero = value;
+    }
+
+    set bairro(value: string) {
+        this._bairro = value;
+    }
 }
 
 export default Endereco;
