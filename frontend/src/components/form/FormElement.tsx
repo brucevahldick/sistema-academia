@@ -12,7 +12,6 @@ function FormElement({children, onSubmitFunction}: Props) {
             {children}
             <div className="system-form-buttons">
                 <Button title="Enviar" type={ButtonTypes.Submit} additionalClasses="btn-outline-success"/>
-                <Button title="Limpar" type={ButtonTypes.Reset} additionalClasses="btn-outline-danger"/>
             </div>
         </form>
     </div>

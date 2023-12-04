@@ -2,6 +2,7 @@ import {ReactNode} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import Cadastro from "./pages/Cadastro.tsx";
+import Alunos from "./pages/Alunos.tsx";
 
 export const CADASTRO_ROUTE: string = '/cadastro';
 export const ALUNOS_ROUTE: string = '/alunos';
@@ -26,7 +27,7 @@ function AppRoutes({children}: Props) {
             <Routes>
                 <Route index element={<Home/>}/>
                 <Route path={CADASTRO_ROUTE} element={<Cadastro/>}/>
-                {/*<Route path={ALUNOS_ROUTE} element={<Alunos/>}/>*/}
+                <Route path={ALUNOS_ROUTE} element={<Alunos/>}/>
             </Routes>
         </BrowserRouter>
     </>

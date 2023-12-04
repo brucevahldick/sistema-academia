@@ -1,5 +1,6 @@
 package com.web.backend.model.pessoa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,6 +10,7 @@ public class PessoaContato {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa pessoa;
 

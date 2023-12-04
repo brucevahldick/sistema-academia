@@ -1,7 +1,5 @@
-import AlunosListTeste from "./AlunosListTeste.tsx";
-
 function Home() {
-    return <AlunosListTeste/>
+    return <></>
 }
 
 export default Home

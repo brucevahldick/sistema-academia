@@ -1,11 +1,11 @@
-import Aluno from "../model/Aluno.ts";
-import Button, {ButtonTypes} from "../components/general/Button.tsx";
+import Aluno from "../../model/Aluno.ts";
+import Button, {ButtonTypes} from "../general/Button.tsx";
 
 interface Props {
     alunos: Aluno[]
 }
 
-function AlunoList({alunos}: Props) {
+function AlunosList({alunos}: Props) {
     return <ul className="list-group-flush" style={{display: "flex", flexDirection: "column", gap: "16px"}}>
         {alunos.map((aluno, index) =>
             <li className="list-group-item" style={{display: "flex", width: "100%", justifyContent: "space-around"}}>
@@ -28,4 +28,4 @@ function AlunoList({alunos}: Props) {
     </ul>
 }
 
-export default AlunoList
+export default AlunosList

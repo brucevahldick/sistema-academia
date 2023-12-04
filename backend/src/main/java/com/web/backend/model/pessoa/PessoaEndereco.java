@@ -1,5 +1,6 @@
 package com.web.backend.model.pessoa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,6 +10,7 @@ public class PessoaEndereco {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa pessoa;
 
@@ -26,6 +28,9 @@ public class PessoaEndereco {
 
     @Column(columnDefinition = "text")
     private String cep;
+
+    @Column(columnDefinition = "text")
+    private String bairro;
 
     public Long getId() {
         return id;
@@ -81,5 +86,13 @@ public class PessoaEndereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 }
