@@ -7,7 +7,7 @@ import FormGroup from "../form/FormGroup.tsx";
 import Input from "../form/Input.tsx";
 import Select from "../form/Select.tsx";
 import Checkbox from "../form/Checkbox.tsx";
-import {makeApiPatchCall, makeApiPostCall, makeApiPutCall} from "../../service/ApiCall.ts";
+import {makeApiPostCall, makeApiPutCall} from "../../service/ApiCall.ts";
 import {AxiosResponse} from "axios";
 import {PORTA_ALUNO} from "../../service/PessoaService.ts";
 import {useNavigate} from "react-router-dom";
