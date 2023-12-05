@@ -8,12 +8,12 @@ const api = axios.create({
     }
 });
 
-export function makeApiGetCall(porta: string, successFn: (response: AxiosResponse) => any, errorFn: (error: any) => any, pathParams?: [any]): any {
+export function makeApiGetCall(porta: string, successFn: (response: AxiosResponse) => any, errorFn: (error: any) => any, pathParams?: [any]): Promise<any> {
     for (const pathParam in pathParams) {
         // @ts-ignore
         porta += "/" + pathParams[pathParam];
     }
-    api.get(porta).then((response: AxiosResponse) => {
+    return api.get(porta).then((response: AxiosResponse) => {
         return successFn(response);
     }).catch((error) => {
         return errorFn(error);
@@ -38,9 +38,18 @@ export function makeApiPutCall(porta: string, successFn: (response: AxiosRespons
 
 export function makeApiDeleteCall(porta: string, successFn: (response: AxiosResponse) => any, errorFn: (error: any) => any, pathParams?: [any]): any {
     for (const pathParam in pathParams) {
-        porta += "/" + pathParam;
+        // @ts-ignore
+        porta += "/" + pathParams[pathParam];
     }
     api.delete(porta).then((response: AxiosResponse) => {
+        return successFn(response);
+    }).catch((error) => {
+        return errorFn(error);
+    });
+}
+
+export function makeApiPatchCall(porta: string, successFn: (response: AxiosResponse) => any, errorFn: (error: any) => any, body: {}) {
+    api.patch(porta, body).then((response: AxiosResponse) => {
         return successFn(response);
     }).catch((error) => {
         return errorFn(error);

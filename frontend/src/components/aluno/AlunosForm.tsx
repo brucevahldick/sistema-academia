@@ -7,9 +7,11 @@ import FormGroup from "../form/FormGroup.tsx";
 import Input from "../form/Input.tsx";
 import Select from "../form/Select.tsx";
 import Checkbox from "../form/Checkbox.tsx";
-import {makeApiPutCall} from "../../service/ApiCall.ts";
+import {makeApiPatchCall, makeApiPostCall, makeApiPutCall} from "../../service/ApiCall.ts";
 import {AxiosResponse} from "axios";
-import {findPessoaById} from "../../service/PessoaService.ts";
+import {PORTA_ALUNO} from "../../service/PessoaService.ts";
+import {useNavigate} from "react-router-dom";
+import {EDITAR_ALUNO_ROUTE} from "../../AppRoutes.tsx";
 
 const optionsSexo = [
     new SelectOption('masculino', 'Masculino'),
@@ -48,12 +50,15 @@ const brazilianStates = [
 ];
 
 interface Props {
-    aluno?: Aluno
+    aluno?: Aluno,
+    readonly?: boolean,
+    showId?: boolean
 }
 
-function AlunosForm({aluno}: Props) {
+function AlunosForm({aluno, readonly, showId}: Props) {
 
     const [formValues, setFormValues] = useState({
+        inputId: aluno?.id || 0,
         inputNome: aluno?.nome || '',
         inputDataNascimento: aluno?.dataNascimento.toISOString() || '',
         inputSexo: aluno?.sexo || '',
@@ -78,10 +83,8 @@ function AlunosForm({aluno}: Props) {
 
     const handleSuccess = async (response: AxiosResponse) => {
         const pessoaId = response.data.params[0].valor;
-        const pessoa = await findPessoaById(pessoaId);
-        if (pessoa instanceof Aluno) {
-            return <AlunosForm aluno={pessoa}/>
-        }
+        const navigate = useNavigate();
+        navigate(EDITAR_ALUNO_ROUTE + `/${pessoaId}`);
     }
 
     const handleError = (error: any) => {
@@ -90,58 +93,72 @@ function AlunosForm({aluno}: Props) {
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-        makeApiPutCall('/pessoas/aluno', handleSuccess, handleError, formValues)
+        if (formValues.inputId) {
+            if (window.confirm("Deseja editar o aluno " + formValues.inputNome + "?")) {
+                makeApiPostCall(PORTA_ALUNO, handleSuccess, handleError, formValues)
+            }
+        } else {
+            makeApiPutCall(PORTA_ALUNO, handleSuccess, handleError, formValues)
+        }
     };
 
-    return <FormElement onSubmitFunction={handleSubmit}>
+    return <FormElement readonly={readonly || false} onSubmitFunction={handleSubmit}>
+        <Row>
+            <FormGroup labelName={(showId || readonly) ? "ID" : ""} formGroupClass="col">
+                <Input placeholder={''} inputId="inputId" type={(showId || readonly) ? "text" : "hidden"}
+                       value={formValues.inputId.toString()}
+                       readonly={showId || readonly || false}/>
+            </FormGroup>
+        </Row>
         <Row>
             <FormGroup labelName="Nome" formGroupClass="col">
                 <Input handleChange={handleChange} placeholder="Nome" inputId="inputNome" type="text"
-                       value={formValues.inputNome}/>
+                       value={formValues.inputNome} readonly={readonly || false}/>
             </FormGroup>
         </Row>
         <Row>
             <FormGroup labelName="Data de Nascimento" formGroupClass="col-md-6">
                 <Input handleChange={handleChange} placeholder="Data de Nascimento" inputId="inputDataNascimento"
-                       type="date" value={formValues.inputDataNascimento}/>
+                       type="date" value={formValues.inputDataNascimento} readonly={readonly || false}/>
             </FormGroup>
             <FormGroup labelName="Sexo" formGroupClass="col-md-3">
                 <Select handleChange={handleChange} inputId="inputSexo" options={optionsSexo}
-                        value={formValues.inputSexo}/>
+                        value={formValues.inputSexo} readonly={readonly || false}/>
             </FormGroup>
             <FormGroup labelName="Ativo" formGroupClass="col-md-3">
                 <Checkbox handleChange={handleChange} inputId="inputAtivo" checkboxSelecionado="O usuário está ativo"
-                          checkboxNaoSelecionado="O usuário não está ativo" value={formValues.inputAtivo}/>
+                          checkboxNaoSelecionado="O usuário não está ativo" value={formValues.inputAtivo}
+                          readonly={readonly || false}/>
             </FormGroup>
         </Row>
         <Row rowTitle="Contato">
             <FormGroup labelName="E-mail" formGroupClass="col">
                 <Input handleChange={handleChange} placeholder="E-mail" inputId="inputEmail" type="email"
-                       value={formValues.inputEmail}/>
+                       value={formValues.inputEmail} readonly={readonly || false}/>
             </FormGroup>
         </Row>
         <Row>
             <FormGroup labelName="Fone" formGroupClass="col">
                 <Input handleChange={handleChange} placeholder="Fone" inputId="inputFone" type="tel"
-                       value={formValues.inputFone}/>
+                       value={formValues.inputFone} readonly={readonly || false}/>
             </FormGroup>
             <FormGroup labelName="Celular" formGroupClass="col">
                 <Input handleChange={handleChange} placeholder="Celular" inputId="inputCelular" type="tel"
-                       value={formValues.inputCelular}/>
+                       value={formValues.inputCelular} readonly={readonly || false}/>
             </FormGroup>
         </Row>
         <Row rowTitle="Endereço">
             <FormGroup labelName="CEP" formGroupClass="col-md-4">
                 <Input handleChange={handleChange} placeholder="CEP" inputId="inputCEP" type="text"
-                       value={formValues.inputCEP}/>
+                       value={formValues.inputCEP} readonly={readonly || false}/>
             </FormGroup>
             <FormGroup labelName="Cidade/Estado" formGroupClass="col-md-8">
                 <div className="input-group">
                     <Input handleChange={handleChange} placeholder="Cidade" inputId="inputCidade" type="text"
-                           value={formValues.inputCidade}/>
+                           value={formValues.inputCidade} readonly={readonly || false}/>
                     <span className="input-group-text">/</span>
                     <Select handleChange={handleChange} inputId="inputUF" options={brazilianStates}
-                            value={formValues.inputUF}/>
+                            value={formValues.inputUF} readonly={readonly || false}/>
                 </div>
             </FormGroup>
         </Row>
@@ -150,15 +167,15 @@ function AlunosForm({aluno}: Props) {
                 <div className="input-group">
                     <Input handleChange={handleChange} placeholder="Rua" inputId="inputRua" type="text"
                            value={formValues.inputRua}
-                           style={{width: "50%"}}/>
+                           style={{width: "50%"}} readonly={readonly || false}/>
                     <span className="input-group-text">-</span>
                     <Input handleChange={handleChange} placeholder="Número" inputId="inputNumero" type="number"
-                           value={formValues.inputNumero.toString()}/>
+                           value={formValues.inputNumero.toString()} readonly={readonly || false}/>
                 </div>
             </FormGroup>
             <FormGroup labelName="Bairro" formGroupClass="col-md-4">
                 <Input handleChange={handleChange} placeholder="Bairro" inputId="inputBairro" type="text"
-                       value={formValues.inputBairro}/>
+                       value={formValues.inputBairro} readonly={readonly || false}/>
             </FormGroup>
         </Row>
     </FormElement>

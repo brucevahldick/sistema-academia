@@ -36,9 +36,7 @@ public class PessoaController {
 
     @GetMapping("/pessoas/aluno/{pessoaId}")
     public ResponseEntity<Pessoa> findById(@PathVariable Long pessoaId) {
-        return pessoaRepository.findById(pessoaId)
-                .map(pessoa -> ResponseEntity.ok().body(pessoa))
-                .orElse(ResponseEntity.notFound().build());
+        return pessoaRepository.findById(pessoaId).map(pessoa -> ResponseEntity.ok().body(pessoa)).orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/pessoas/aluno")
@@ -96,17 +94,83 @@ public class PessoaController {
         return this.operate(pessoa, "adicionado");
     }
 
+    @PostMapping("/pessoas/aluno")
+    public MessageResponse editPessoa(@RequestBody JsonNode jsonNode) {
+        if (jsonNode.has("inputId")) {
+            String id = jsonNode.get("inputId").asText();
+            if (id != null) {
+                Long idLong = Long.parseLong(id);
+                Pessoa pessoa = pessoaRepository.findById(idLong).get();
+                String nome = jsonNode.get("inputNome").asText();
+                pessoa.setNome(nome);
+//                String dataNascimento = jsonNode.get("inputDataNascimento").asText();
+//                Date dateObject = Date.valueOf(dataNascimento);
+//                pessoa.setDataNascimento(dateObject);
+                String sexo = jsonNode.get("inputSexo").asText();
+                pessoa.setSexo(sexo);
+                String ativo = jsonNode.get("inputAtivo").asText();
+                pessoa.setAtivo(Boolean.parseBoolean(ativo));
+                pessoa.setTipo(PessoaTipo.ALUNO.getId());
+                pessoaRepository.save(pessoa);
+                for (PessoaContato pessoaContato : pessoa.getPessoaContatos()) {
+                    if (pessoaContato.getTipo() == PessoaContatoTipo.EMAIL.getId()) {
+                        if (jsonNode.has("inputEmail")) {
+                            String email = jsonNode.get("inputEmail").asText();
+                            pessoaContato.setContato(email);
+                            pessoaContato.setPessoa(pessoa);
+                            pessoaContato.setTipo(PessoaContatoTipo.EMAIL.getId());
+                            pessoaContatoRepository.save(pessoaContato);
+                        }
+                    } else if (pessoaContato.getTipo() == PessoaContatoTipo.TELEFONE.getId()) {
+                        if (jsonNode.has("inputFone")) {
+                            String fone = jsonNode.get("inputFone").asText();
+                            pessoaContato.setContato(fone);
+                            pessoaContato.setPessoa(pessoa);
+                            pessoaContato.setTipo(PessoaContatoTipo.TELEFONE.getId());
+                            pessoaContatoRepository.save(pessoaContato);
+                        }
+                    } else if (pessoaContato.getTipo() == PessoaContatoTipo.CELULAR.getId()) {
+                        if (jsonNode.has("inputCelular")) {
+                            String celular = jsonNode.get("inputCelular").asText();
+                            pessoaContato.setContato(celular);
+                            pessoaContato.setPessoa(pessoa);
+                            pessoaContato.setTipo(PessoaContatoTipo.CELULAR.getId());
+                            pessoaContatoRepository.save(pessoaContato);
+                        }
+                    }
+                }
+//                PessoaEndereco pessoaEndereco = pessoa.getPessoaEnderecos().getFirst();
+//                String cep = jsonNode.get("inputCEP").asText();
+//                String cidade = jsonNode.get("inputCidade").asText();
+//                String uf = jsonNode.get("inputUF").asText();
+//                String rua = jsonNode.get("inputRua").asText();
+//                String numero = jsonNode.get("inputNumero").asText();
+//                String bairro = jsonNode.get("inputBairro").asText();
+//                pessoaEndereco.setCep(cep);
+//                pessoaEndereco.setCidade(cidade);
+//                pessoaEndereco.setEstado(uf);
+//                pessoaEndereco.setRua(rua);
+//                pessoaEndereco.setNumero(numero);
+//                pessoaEndereco.setBairro(bairro);
+//                pessoaEnderecoRepository.save(pessoaEndereco);
+                return this.operate(pessoa, "adicionado");
+            }
+        }
+        return new MessageResponse(false, "Pessoa não encontrada");
+    }
+
     @DeleteMapping("/pessoas/aluno/{pessoaId}")
     public MessageResponse removePessoa(@PathVariable Long pessoaId) {
         try {
             Optional<Pessoa> pessoa = pessoaRepository.findById(pessoaId);
             if (pessoa.isPresent()) {
-                pessoa.get().setAtivo(false);
-                pessoaRepository.save(pessoa.get());
-                return this.operate(pessoa.get(), "Pessoa removida");
-            } else {
-                throw new Exception("Pessoa não encontrada");
+//                pessoa.get().setAtivo(false);
+//                pessoaRepository.save(pessoa.get());
+//                return this.operate(pessoa.get(), "Pessoa removida");
+                pessoaRepository.delete(pessoa.get());
+                return new MessageResponse(true, "Aluno removido com sucesso");
             }
+            throw new Exception("Pessoa não encontrada");
         } catch (Exception exception) {
             return new MessageResponse(false, exception.getMessage());
         }

@@ -1,14 +1,23 @@
 import Aluno from "../model/Aluno.ts";
 import {makeApiGetCall} from "./ApiCall.ts";
-import {AxiosResponse} from "axios";
 import Endereco from "../model/Endereco.ts";
+import {AxiosResponse} from "axios";
 
-const handleSuccess = (response: AxiosResponse) => {
-    const aluno = response.data;
+export const PORTA_ALUNO = '/pessoas/aluno';
+
+export async function findPessoaById(id: any): Promise<Aluno | null> {
+    const response = await makeApiGetCall(PORTA_ALUNO, (response: AxiosResponse) => {
+        return response.data;
+    }, () => {
+    }, [id]);
+    return buildPessoaFromPayload(response);
+}
+
+export function buildPessoaFromPayload(aluno: any) {
     let fone = '';
     let email = '';
     let celular = '';
-    if (aluno.pessoaContatos) {
+    if (aluno.pessoaContatos.length > 0) {
         for (const contato in aluno.pessoaContatos) {
             const valorContato = aluno.pessoaContatos[contato].contato;
             switch (aluno.pessoaContatos[contato].tipo) {
@@ -24,7 +33,7 @@ const handleSuccess = (response: AxiosResponse) => {
         }
     }
     const endereco = new Endereco('', '', '', '', 0, '');
-    if (aluno.pessoaEnderecos) {
+    if (aluno.pessoaEnderecos.length > 0) {
         endereco.estado = aluno.pessoaEnderecos[0].estado;
         endereco.cidade = aluno.pessoaEnderecos[0].cidade;
         endereco.rua = aluno.pessoaEnderecos[0].rua;
@@ -44,16 +53,4 @@ const handleSuccess = (response: AxiosResponse) => {
         email,
         endereco
     );
-}
-
-const handleError = (error: any) => {
-    return error;
-}
-
-export async function findPessoaById(id: any): Promise<Aluno | null | undefined> {
-    const response = await makeApiGetCall('/pessoas/aluno', handleSuccess, handleError, [id]);
-    if (response.data.success) {
-        // return new Aluno();
-    }
-    return null;
 }

@@ -1,5 +1,7 @@
+import Alunos from "./Alunos.tsx";
+
 function Home() {
-    return <></>
+    return <Alunos/>
 }
 
 export default Home
