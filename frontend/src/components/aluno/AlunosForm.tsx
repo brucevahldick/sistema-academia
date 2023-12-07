@@ -51,11 +51,10 @@ const brazilianStates = [
 
 interface Props {
     aluno?: Aluno,
-    readonly?: boolean,
-    showId?: boolean
+    readonly?: boolean
 }
 
-function AlunosForm({aluno, readonly, showId}: Props) {
+function AlunosForm({aluno, readonly}: Props) {
 
     const [formValues, setFormValues] = useState({
         inputId: aluno?.id || 0,
@@ -104,10 +103,10 @@ function AlunosForm({aluno, readonly, showId}: Props) {
 
     return <FormElement readonly={readonly || false} onSubmitFunction={handleSubmit}>
         <Row>
-            <FormGroup labelName={(showId || readonly) ? "ID" : ""} formGroupClass="col">
-                <Input placeholder={''} inputId="inputId" type={(showId || readonly) ? "text" : "hidden"}
+            <FormGroup labelName={(formValues.inputId) ? "ID" : ""} formGroupClass="col">
+                <Input placeholder={''} inputId="inputId" type={(formValues.inputId) ? "text" : "hidden"}
                        value={formValues.inputId.toString()}
-                       readonly={showId || readonly || false}/>
+                       readonly={true}/>
             </FormGroup>
         </Row>
         <Row>

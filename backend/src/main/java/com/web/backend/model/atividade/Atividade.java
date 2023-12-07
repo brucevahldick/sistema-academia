@@ -1,5 +1,6 @@
 package com.web.backend.model.atividade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.web.backend.model.Midia;
 import jakarta.persistence.*;
 
@@ -18,13 +19,14 @@ public class Atividade {
     @Column(columnDefinition = "integer")
     private int duracaoMinutos;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name = "atividade_midia",
-            joinColumns = @JoinColumn(name = "atividade_id"),
-            inverseJoinColumns = @JoinColumn(name = "midia_id")
-    )
-    private ArrayList<Midia> imagens;
+//    @JsonIgnore
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(
+//            name = "atividade_midia",
+//            joinColumns = @JoinColumn(name = "atividade_id"),
+//            inverseJoinColumns = @JoinColumn(name = "midia_id")
+//    )
+//    private ArrayList<Midia> imagens;
 
     public Long getId() {
         return id;
@@ -50,15 +52,15 @@ public class Atividade {
         this.duracaoMinutos = duracaoMinutos;
     }
 
-    public void addImagem(Midia midia) {
-        this.imagens.add(midia);
-    }
-
-    public ArrayList<Midia> getImagens() {
-        return imagens;
-    }
-
-    public void setImagens(ArrayList<Midia> imagens) {
-        this.imagens = imagens;
-    }
+//    public void addImagem(Midia midia) {
+//        this.imagens.add(midia);
+//    }
+//
+//    public ArrayList<Midia> getImagens() {
+//        return imagens;
+//    }
+//
+//    public void setImagens(ArrayList<Midia> imagens) {
+//        this.imagens = imagens;
+//    }
 }

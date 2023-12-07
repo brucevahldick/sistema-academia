@@ -2,10 +2,11 @@ import AlunosList from "../components/aluno/AlunosList.tsx";
 import {AxiosResponse} from "axios";
 import {makeApiGetCall} from "../service/ApiCall.ts";
 import {useEffect, useState} from "react";
-import {buildPessoaFromPayload} from "../service/PessoaService.ts";
+import {buildPessoaFromPayload, PORTA_ALUNO} from "../service/PessoaService.ts";
 import Aluno from "../model/Aluno.ts";
-
-const LIST_ALL_ALUNOS = 'pessoas/aluno';
+import {Link} from "react-router-dom";
+import {CADASTRO_ALUNO_ROUTE} from "../AppRoutes.tsx";
+import Button, {ButtonTypes} from "../components/general/Button.tsx";
 
 const apiReturnError = (error: any) => {
     return error;
@@ -26,9 +27,16 @@ function Alunos() {
             return null;
         }
 
-        makeApiGetCall(LIST_ALL_ALUNOS, apiReturnSuccess, apiReturnError);
+        makeApiGetCall(PORTA_ALUNO, apiReturnSuccess, apiReturnError);
     }, []);
-    return <AlunosList alunos={alunosList}/>
+    return <>
+        <div className={"container pt-5"}>
+            <Link to={CADASTRO_ALUNO_ROUTE}>
+                <Button title={"Cadastro"} type={ButtonTypes.Button} additionalClasses="btn-outline-success"/>
+            </Link>
+        </div>
+        <AlunosList alunos={alunosList}/>
+    </>
 }
 
 export default Alunos

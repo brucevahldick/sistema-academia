@@ -17,7 +17,7 @@ function AlunosEdit() {
     if (!aluno) {
         return <div>Loading...</div>;
     }
-    return <AlunosForm showId={true} aluno={aluno}/>
+    return <AlunosForm aluno={aluno}/>
 }
 
 export default AlunosEdit
