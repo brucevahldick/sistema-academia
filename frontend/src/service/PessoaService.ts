@@ -4,6 +4,7 @@ import Endereco from "../model/Endereco.ts";
 import {AxiosResponse} from "axios";
 
 export const PORTA_ALUNO = '/pessoas/aluno';
+export const PORTA_INSTRUTOR = '/pessoas/instrutor';
 
 export async function findPessoaById(id: any): Promise<Aluno | null> {
     const response = await makeApiGetCall(PORTA_ALUNO, (response: AxiosResponse) => {

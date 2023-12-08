@@ -1,7 +1,7 @@
 import MenuItemModel from "./model/MenuItemModel.ts";
 import AppRoutes, {
     // AJUDA_ROUTE,
-    ALUNOS_ROUTE, ATIVIDADES_ROUTE,
+    ALUNOS_ROUTE, ATIVIDADES_ROUTE, INSTRUTORES_ROUTE,
     // CADASTRO_ALUNO_ROUTE,
     // CAIXA_ROUTE,
     // COMPRAS_ROUTE,
@@ -16,7 +16,8 @@ function App() {
         new MenuItemModel('Home', '/'),
         // new MenuItemModel('Cadastro', CADASTRO_ALUNO_ROUTE),
         new MenuItemModel('Alunos', ALUNOS_ROUTE),
-        new MenuItemModel('Atividades', ATIVIDADES_ROUTE)
+        new MenuItemModel('Atividades', ATIVIDADES_ROUTE),
+        new MenuItemModel('Instrutores', INSTRUTORES_ROUTE)
         // new MenuItemModel('Hpp', HORARIOS_ROUTE),
         // new MenuItemModel('', VENDAS_ROUTE),
         // new MenuItemModel('Cpp', COMPRAS_ROUTE),
